@@ -1,0 +1,22 @@
+class Solution:
+    """
+    @param nums: A list of integer which is 0, 1 or 2 
+    @return: nothing
+    """
+    def sortColors(self, nums):
+        nums,left = self.sort(nums,0,len(nums)-1,0)
+        nums,left = self.sort(nums,left,len(nums)-1,1)
+        return nums,left
+            
+        
+    def sort(self,nums,left,right,flag):
+        while left<=right:
+            while left<=right and nums[left]==flag:
+                left += 1 
+            while left<=right and nums[right]>flag:
+                right -= 1 
+            if left <= right:
+                nums[left],nums[right] = nums[right],nums[left]
+                left += 1 
+                right -= 1
+        return nums,left
