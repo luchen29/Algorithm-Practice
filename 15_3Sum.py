@@ -28,7 +28,33 @@ class Solution(object):
     		index += 1 
     	return result
 
-
+class Solution(object):
+    def threeSum(self, nums):
+        if not nums or len(nums)<3:
+            return []
+        nums.sort()
+        self.result = []
+        for idx in range(0, len(nums)-2):
+            left, right = idx+1, len(nums)-1
+            target = 0-nums[idx]
+            if idx != 0 and nums[idx] == nums[idx-1]:
+                continue
+            self.findSum(nums, target, left, right)
+        return self.result
+    
+    def findSum(self, nums, target, left, right):
+        while left < right:
+            if nums[left] + nums[right] == target:
+                self.result.append([-target, nums[left], nums[right]])
+                left += 1
+                right -= 1
+                while left < right and nums[left] == nums[left-1]:
+                    left += 1
+                while left < right and nums[right] == nums[right+1]:
+                    right -=1
+            elif nums[left] + nums[right] < target:
+                left += 1
+            else: right -= 1
 
 class Solution(object):
     def threeSum(self, nums):
